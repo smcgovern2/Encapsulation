@@ -7,7 +7,7 @@ import java.util.Date;
  * As with the previous lab you should focus on CLASS Encapsulation and the 
  * Single Responsibility Principle (SRP). However what makes this lab DIFFERENT
  * is that in a real program you would need more than just an Employee class 
- * and a EmployeeResportService class. Remember what you learned about OOA/D and 
+ * and a EmployeeReportService class. Remember what you learned about OOA/D and
  * finding the Conceptual Objects in the Problem Domain.
  * 
  * Pay special attention to the following issues:
@@ -74,7 +74,7 @@ public class Employee {
         SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
         return sdf.format(orientationDate);
     }
-    
+
     /*
         This method is public because it must be available to other classes in
         this project. Notice that it controls the order in which the helper methods
@@ -88,7 +88,7 @@ public class Employee {
         reviewDeptPolicies();
         moveIntoCubicle(cubeId);
     }
-    
+
     // The following methods may be public or private, depending on whether
     // they need to be called from other classes independently.
 
@@ -115,7 +115,7 @@ public class Employee {
     }
 
     // Assume this must be performed third. And assume that because department
-    // policies may change that this method may need to be called 
+    // policies may change that this method may need to be called
     // independently from other classes.
     public void reviewDeptPolicies() {
         reviewedDeptPolicies = true;
@@ -124,7 +124,7 @@ public class Employee {
     }
 
     // Assume this must be performed 4th. And assume that because employees
-    // sometimes change office locations that this method may need to be called 
+    // sometimes change office locations that this method may need to be called
     // independently from other classes.
     public void moveIntoCubicle(String cubeId) {
         this.cubeId = cubeId;

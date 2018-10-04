@@ -36,24 +36,27 @@ public class Employee {
         this.ssn = ssn;
     }
 
+    public void hireEmloyee(String cubeId){
+        meetWithHrForBenefitAndSalryInfo();
+        meetDepartmentStaff();
+        reviewDeptPolicies();
+        moveIntoCubicle(cubeId);
+    }
+
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.
-    public void meetWithHrForBenefitAndSalryInfo() {
+    private void meetWithHrForBenefitAndSalryInfo() {
         metWithHr = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " met with Hr on "
-            + fmtDate);
+            + getFormattedOrientationDate());
     }
 
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.:
-    public void meetDepartmentStaff() {
+    private void meetDepartmentStaff() {
         metDeptStaff = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " met with Dept. Staff on "
-            + fmtDate);
+            + getFormattedOrientationDate());
     }
 
     // Assume this must be performed third. And assume that because department
@@ -61,10 +64,8 @@ public class Employee {
     // independently from other classes.
     public void reviewDeptPolicies() {
         reviewedDeptPolicies = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " reviewed Dept policies on "
-            + fmtDate);
+            + getFormattedOrientationDate());
     }
 
     // Assume this must be performed 4th. And assume that because employees
@@ -73,11 +74,15 @@ public class Employee {
     public void moveIntoCubicle(String cubeId) {
         this.cubeId = cubeId;
         this.movedIn = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        String fmtDate = sdf.format(orientationDate);        
         System.out.println(firstName + " " + lastName + " moved into cubicle "
-                + cubeId + " on " + fmtDate);
+                + cubeId + " on " + getFormattedOrientationDate());
     }
+
+    private String getFormattedOrientationDate(){
+       String fmtDate = DateUtilities.getFormattedDate(this.orientationDate);
+       return fmtDate;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -86,24 +91,47 @@ public class Employee {
     // setter methods give the developer the power to control what data is
     // allowed through validation.
     
-    public void setFirstName(String firstName) {
-       this.firstName = firstName;
+    public void setFirstName(String firstName) throws Exception {
+
+        if (firstName.length() <= 2) {
+            if(firstName.length() > 16){
+                this.firstName = firstName;
+            } else {
+                throw new Exception("Name must have a length of 16 or lower");
+            }
+        } else {
+            throw new Exception("Name must have length of 2 or higher");
+        }
+
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-       this.lastName = lastName;
+    public void setLastName(String lastName) throws Exception {
+        if (lastName.length() <= 2) {
+            if(lastName.length() > 16){
+                this.lastName = lastName;
+            } else {
+                throw new Exception("Name must have a length of 16 or lower");
+            }
+        } else {
+            throw new Exception("Name must have length of 2 or higher");
+        }
     }
 
     public String getSsn() {
         return ssn;
     }
 
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
+    public void setSsn(String ssn) throws Exception {
+        if (ssn.length() != 9){
+            this.ssn = ssn;
+        } else {
+            throw new Exception("ssn length must be exactly 9");
+        }
+
     }
 
     public boolean isMetWithHr() {
@@ -144,14 +172,23 @@ public class Employee {
     }
 
     
-    public void setCubeId(String cubeId) {
-        this.cubeId = cubeId;
+    public void setCubeId(String cubeId) throws Exception {
+        if (!cubeId.isEmpty() && cubeId != null){
+            this.cubeId = cubeId;
+        } else {
+            throw new Exception("Cube id is invalid");
+        }
     }
 
-    public Date getOrientationDate() {
-        return orientationDate;
+    public Date getOrientationDate() throws Exception {
+        if(orientationDate!=null) {
+            return orientationDate;
+        } else {
+            throw new Exception("Orientation date is invalid");
+        }
     }
 
     public void setOrientationDate(Date orientationDate) {
         this.orientationDate = orientationDate;
-    }}
+    }
+}
