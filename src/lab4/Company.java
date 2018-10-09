@@ -14,7 +14,14 @@ public class Company {
 
     public void hireEmployee(Employee e){
         hiringManager.orientEmployee(e);
+        employees.add(e);
+    }
 
+    public HiringManager getHiringManager() {
+        return hiringManager;
+    }
 
+    public void setHiringManager(HiringManager hiringManager) {
+        this.hiringManager = hiringManager;
     }
 }

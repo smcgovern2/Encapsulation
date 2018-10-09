@@ -1,5 +1,7 @@
 package lab4;
 
+import java.util.ArrayList;
+
 /**
  * This class is the startup class for the program. But together with the 
  * other classes provided it is not a particularly good simulation of the 
@@ -12,10 +14,19 @@ package lab4;
 public class Startup {
     public static void main(String[] args) {
 
-        Employee employee = new Employee("Peter","Piper","333-33-3333");
-        
-        employee.doFirstTimeOrientation("A101");
-        employee.getReportService().outputReport();
+        Company company = new Company();
+
+        ArrayList<Employee> applicants = new ArrayList<>();
+        applicants.add(new Employee("Peter","Piper","333-33-3333"));
+        applicants.add(new Employee("Bob","Brown","333-33-3333"));
+        applicants.add(new Employee("Timmy","Thomson","333-33-3333"));
+        applicants.add(new Employee("Johnny","Johnson","333-33-3333"));
+
+
+        for (Employee e : applicants) {
+            company.hireEmployee(e);
+            e.getReportService().outputReport();
+        }
     }
     
     
